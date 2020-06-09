@@ -1,0 +1,5 @@
+#!/bin/bash
+go build github.com/evgeny-klyopov/sentry-notifier
+env GOARCH=amd64 GOOS=linux go build github.com/evgeny-klyopov/sentry-notifier
+tar -cvzf sentry-notifier.linux-amd64.tar.gz sentry-notifier
+tar -cvzf sentry-notifier.windows-amd64.exe.tar.gz sentry-notifier.exe
