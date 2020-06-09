@@ -1,11 +1,11 @@
 package main
 
 import (
-	"sentry-notifier/app"
-	"sentry-notifier/config"
+	"github.com/evgeny-klyopov/sentry-notifier/app"
+	"github.com/evgeny-klyopov/sentry-notifier/config"
 )
 
-func main()  {
+func main() {
 	cfg, err := config.GetConfig("config.json")
 
 	if err != nil {

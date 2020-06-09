@@ -9,7 +9,6 @@ import (
 const MdFormatType = "md"
 
 type MD struct {
-
 }
 
 func (m MD) Build(project sentry.Project, issue sentry.Issue) string {

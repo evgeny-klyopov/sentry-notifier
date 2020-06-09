@@ -17,7 +17,7 @@ type issueFilter struct {
 
 type sentry struct {
 	IssueFilter issueFilter `json:"issue_filter"`
-	WaitTime    int64        `json:"wait_time"`
+	WaitTime    int64       `json:"wait_time"`
 }
 type Setting struct {
 	Sentry        sentry        `json:"sentry"`

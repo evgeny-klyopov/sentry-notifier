@@ -2,21 +2,21 @@ package app
 
 import (
 	"github.com/atlassian/go-sentry-api"
+	"github.com/evgeny-klyopov/sentry-notifier/app/message"
+	"github.com/evgeny-klyopov/sentry-notifier/app/sender"
+	"github.com/evgeny-klyopov/sentry-notifier/config"
 	"io"
 	"io/ioutil"
 	"os"
-	"sentry-notifier/app/message"
-	"sentry-notifier/app/sender"
-	"sentry-notifier/config"
 	"sort"
 	"strconv"
 	"time"
 )
 
-type sendMessage struct{
-	message string
+type sendMessage struct {
+	message  string
 	stringId string
-	id int64
+	id       int64
 }
 
 type App struct {
@@ -30,7 +30,6 @@ func NewApp(cfg config.Config) *App {
 		dirLog: "logs",
 	}
 }
-
 
 func (a *App) Run() error {
 	if _, err := os.Stat(a.dirLog); os.IsNotExist(err) {
@@ -54,9 +53,8 @@ func (a *App) Run() error {
 	return nil
 }
 
-
 func (a *App) checkAndSend(cfgOrg config.Organization) error {
-	client, _:= sentry.NewClient(cfgOrg.Token, nil, nil)
+	client, _ := sentry.NewClient(cfgOrg.Token, nil, nil)
 	projects, err := a.getSentryProjects(cfgOrg, client)
 	if err != nil {
 		return err
@@ -77,10 +75,6 @@ func (a *App) checkAndSend(cfgOrg config.Organization) error {
 	return nil
 }
 
-
-
-
-
 func (a *App) getSentryProjects(cfgOrg config.Organization, client *sentry.Client) (*[]sentry.Project, error) {
 	var allProject bool
 	if len(*cfgOrg.Projects) == 0 {
@@ -95,7 +89,7 @@ func (a *App) getSentryProjects(cfgOrg config.Organization, client *sentry.Clien
 	var projects []sentry.Project
 	for _, project := range sentryProjects {
 		if allProject == true {
-			projects = append(projects,  project)
+			projects = append(projects, project)
 		} else {
 			for _, configProject := range *cfgOrg.Projects {
 				if configProject.Name == project.Name {
@@ -188,14 +182,12 @@ func (a *App) readLog(path string) (*string, error) {
 	return &result, nil
 }
 
-
 func (a *App) writeToLog(path string, lastIssueID *string) error {
 	file, err := os.Create(path)
 	if err != nil {
 		return err
 	}
 	defer file.Close()
-
 
 	_, err = io.WriteString(file, *lastIssueID)
 	if err != nil {
@@ -243,28 +235,3 @@ func (a *App) processSend(project sentry.Project, issues []sentry.Issue, msgObje
 
 	return a.sendMessages(messages, st, logFile)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

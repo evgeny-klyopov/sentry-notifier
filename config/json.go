@@ -13,4 +13,3 @@ type jsonConfig struct {
 func (j *jsonConfig) build(content []byte) error {
 	return json.Unmarshal(content, &j.config)
 }
-

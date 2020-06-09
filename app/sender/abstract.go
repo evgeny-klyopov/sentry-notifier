@@ -1,6 +1,6 @@
 package sender
 
-import "sentry-notifier/config"
+import "github.com/evgeny-klyopov/sentry-notifier/config"
 
 type Config struct {
 	Telegram config.Telegram
