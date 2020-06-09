@@ -1,0 +1,26 @@
+{
+  "organization": [
+    {
+      "name": "sentry-org",
+      "token": "sentry-token",
+      "projects": [{"name": "sentry-project"}]
+    }
+  ],
+  "default": {
+    "sentry": {
+      "issue_filter": {
+        "query": "is:unresolved",
+        "stats_period": "24h"
+      },
+      "wait_time": 300
+    },
+    "notifications": {
+      "telegram": [{
+        "use_proxy": true,
+        "proxy": "user:password@ip:port",
+        "chat_id": 11111,
+        "token": "your_bot_token"
+      }]
+    }
+  }
+}

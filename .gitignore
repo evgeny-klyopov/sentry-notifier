@@ -7,7 +7,7 @@
 
 .idea
 logs/
-config.json
+/config.json
 
 main
 main.exe
