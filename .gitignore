@@ -9,6 +9,12 @@
 logs/
 config.json
 
+main
+main.exe
+sentry-notifier
+sentry-notifier.linux-amd64.tar.gz
+sentry-notifier.windows-amd64.exe.tar.gz
+
 # Test binary, built with `go test -c`
 *.test
 
