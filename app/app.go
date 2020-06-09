@@ -126,7 +126,8 @@ func (a *App) sendNotification(project sentry.Project, issues []sentry.Issue) er
 				project,
 				issues,
 				msgObject,
-				st.SetConfig(sender.Config{Telegram: cfg}),
+				st,
+				sender.Config{Telegram: cfg},
 				prefixFileLog+strconv.FormatInt(cfg.ChatId, 10)+"_"+suffixFileLog,
 			)
 
@@ -221,7 +222,12 @@ func (a *App) sendMessages(messages *[]sendMessage, st sender.Sender, logFile st
 	return nil
 }
 
-func (a *App) processSend(project sentry.Project, issues []sentry.Issue, msgObject message.Messenger, st sender.Sender, logFile string) error {
+func (a *App) processSend(project sentry.Project, issues []sentry.Issue, msgObject message.Messenger, st sender.Sender, senderConfig sender.Config, logFile string) error {
+	err := st.SetClient(senderConfig)
+	if err != nil {
+		return err
+	}
+
 	messages, err := a.getMessages(
 		project,
 		issues,

@@ -1,14 +1,9 @@
 package config
 
-type Telegram struct {
-	UseProxy bool   `json:"use_proxy"`
-	Proxy    string `json:"proxy"`
-	ChatId   int64  `json:"chat_id"`
-	Token    string `json:"token"`
-	WaitTime uint   `json:"wait_time"`
-}
+import "github.com/evgeny-klyopov/telegram-simple-message"
+
 type notifications struct {
-	Telegram *[]Telegram `json:"telegram"`
+	Telegram *[]telegram.Config `json:"telegram"`
 }
 type issueFilter struct {
 	Query       string `json:"query"`

@@ -1,12 +1,14 @@
 package sender
 
-import "github.com/evgeny-klyopov/sentry-notifier/config"
+import (
+	"github.com/evgeny-klyopov/telegram-simple-message"
+)
 
 type Config struct {
-	Telegram config.Telegram
+	Telegram telegram.Config
 }
 
 type Sender interface {
 	Send(message string) error
-	SetConfig(cfg Config) Sender
+	SetClient(cfg Config) error
 }
